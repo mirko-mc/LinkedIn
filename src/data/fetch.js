@@ -16,3 +16,4 @@ const FETCHURL = "https://striveschool-api.herokuapp.com/api/profile/";
  * "description":"Doing stuff",
  * "area":"Berlin",
  */
+// modifica di esempio
