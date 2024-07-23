@@ -64,6 +64,7 @@ export const listaEsperienze = async (userId) => {
   });
   const dataEsperienze = await response.json();
   return dataEsperienze;
+};
 
 export const creaEsperienza = async (userId, formValue) => {
   const response = await fetch(fetchUrl + `${userId}/experiences`, {
@@ -74,9 +75,9 @@ export const creaEsperienza = async (userId, formValue) => {
     method: "POST",
     body: JSON.stringify(formValue),
   });
-  if (response.ok) {        
-    alert('Esperienza aggiunta')
+  if (response.ok) {
+    alert("Esperienza aggiunta");
   } else {
-    alert('Errore!! Esperienza non aggiunta')
+    alert("Errore!! Esperienza non aggiunta");
   }
 };
