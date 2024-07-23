@@ -19,48 +19,51 @@ const fetchUrl = "https://striveschool-api.herokuapp.com/api/profile/";
  */
 
 export const listaProfili = async () => {
-  const response = await fetch(`${fetchUrl}`, {
+  const response = await fetch(fetchUrl, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `${apiToken}`,
+      Authorization: apiToken,
     },
   });
   const dataProfili = await response.json();
+  return dataProfili;
 };
 
 export const ilTuoProfilo = async () => {
-  const response = await fetch(`${fetchUrl + "me"}`, {
+  const response = await fetch(fetchUrl + "me", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `${apiToken}`,
+      Authorization: apiToken,
     },
   });
   const dataProfilo = await response.json();
+  return dataProfilo;
 };
 
 export const cercaProfilo = async (userId) => {
-  const response = await fetch(`${fetchUrl + userId}`, {
+  const response = await fetch(fetchUrl + userId, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `${apiToken}`,
+      Authorization: apiToken,
     },
   });
   const dataRicerca = await response.json();
+  return dataRicerca;
 };
 
 export const listaEsperienze = async (userId) => {
-  const response = await fetch(`${fetchUrl + `${userId}/experiences`}`, {
+  const response = await fetch(fetchUrl + userId + "/experiences", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `${apiToken}`,
+      Authorization: apiToken,
     },
   });
   const dataEsperienze = await response.json();
-};
+  return dataEsperienze;
 
 export const creaEsperienza = async (userId, formValue) => {
   const response = await fetch(fetchUrl + `${userId}/experiences`, {
