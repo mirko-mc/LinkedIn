@@ -18,13 +18,12 @@ const fetchUrl = "https://striveschool-api.herokuapp.com/api/profile/";
  * "area":"Berlin",
  */
 
-
 export const listaProfili = async () => {
   const response = await fetch(`${fetchUrl}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `${apiToken}`
+      Authorization: `${apiToken}`,
     },
   });
   const dataProfili = await response.json();
@@ -35,31 +34,46 @@ export const ilTuoProfilo = async () => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `${apiToken}`
-    }
+      Authorization: `${apiToken}`,
+    },
   });
-  const dataProfilo = await response.json()
+  const dataProfilo = await response.json();
 };
 
 export const cercaProfilo = async (userId) => {
-    const response = await fetch(`${fetchUrl + '669ed515bf506e0015482e43'}`,{
-        method: 'GET',
-        headers:  {
-            'Content-Type': 'application/json',
-            Authorization: `${apiToken}`
-        }
-    })
-    const dataRicerca = await response.json()
-}
+  const response = await fetch(`${fetchUrl + userId}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `${apiToken}`,
+    },
+  });
+  const dataRicerca = await response.json();
+};
 
-export const listaEsperienze = async () => {   
-    const response = await fetch(`${fetchUrl + '669ed515bf506e0015482e43/experiences'}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `${apiToken}`
-        }
-    })
-    const dataEsperienze = await response.json()
+export const listaEsperienze = async (userId) => {
+  const response = await fetch(`${fetchUrl + `${userId}/experiences`}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `${apiToken}`,
+    },
+  });
+  const dataEsperienze = await response.json();
+};
+
+export const creaEsperienza = async (userId, formValue) => {
+  const response = await fetch(fetchUrl + `${userId}/experiences`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `${apiToken}`,
+    },
+    method: "POST",
+    body: JSON.stringify(formValue),
+  });
+  if (response.ok) {        
+    alert('Esperienza aggiunta')
+  } else {
+    alert('Errore!! Esperienza non aggiunta')
   }
-
+};
