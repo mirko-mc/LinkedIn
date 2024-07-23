@@ -1,31 +1,20 @@
+import { useEffect, useState } from "react";
+import { listaEsperienze } from "../data/fetch";
 import CardExperience from "./CardExperience";
 
 function Experience() {
-  const esperienze = [
-    {
-      role: "sviluppatore fulll-stack",
-      company: "Freelancer",
-      startDate: "2020",
-      endDate: null,
-      description:
-        "Creazione e revisione di siti web, apps, piattaforme di commercio elettronico",
-      area: "da remoto",
-    },
-    {
-      role: "sviluppatore fallito",
-      company: "Freelancer",
-      startDate: "2023-09-14",
-      endDate: "2023-09-15",
-      description:
-        "sgoiuaogao",
-      area: "Tevere",
-    },
-  ];
+  const [experienceList, setExperienceList] = useState([]);
+  useEffect(() => {
+    // rendere dinamico la ricezione dell'id per fare la fetch
+    listaEsperienze("6551e7bbc55e7e0018f83bfb").then((data) =>
+      setExperienceList(data)
+    );
+  }, []);
   return (
     <>
       <h2>Esperienza</h2>
-      {esperienze.map((exp, i) => (
-        <CardExperience key={i} exp={exp} />
+      {experienceList.map((exp) => (
+        <CardExperience key={exp._id} exp={exp} />
       ))}
     </>
   );

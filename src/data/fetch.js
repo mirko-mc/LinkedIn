@@ -18,48 +18,50 @@ const fetchUrl = "https://striveschool-api.herokuapp.com/api/profile/";
  * "area":"Berlin",
  */
 
-
 export const listaProfili = async () => {
-  const response = await fetch(`${fetchUrl}`, {
+  const response = await fetch(fetchUrl, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `${apiToken}`
+      Authorization: apiToken,
     },
   });
   const dataProfili = await response.json();
+  return dataProfili;
 };
 
 export const ilTuoProfilo = async () => {
-  const response = await fetch(`${fetchUrl + "me"}`, {
+  const response = await fetch(fetchUrl + "me", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `${apiToken}`
-    }
+      Authorization: apiToken,
+    },
   });
-  const dataProfilo = await response.json()
+  const dataProfilo = await response.json();
+  return dataProfilo;
 };
 
 export const cercaProfilo = async (userId) => {
-    const response = await fetch(`${fetchUrl + '669ed515bf506e0015482e43'}`,{
-        method: 'GET',
-        headers:  {
-            'Content-Type': 'application/json',
-            Authorization: `${apiToken}`
-        }
-    })
-    const dataRicerca = await response.json()
-}
+  const response = await fetch(fetchUrl + userId, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: apiToken,
+    },
+  });
+  const dataRicerca = await response.json();
+  return dataRicerca;
+};
 
-export const listaEsperienze = async () => {   
-    const response = await fetch(`${fetchUrl + '669ed515bf506e0015482e43/experiences'}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `${apiToken}`
-        }
-    })
-    const dataEsperienze = await response.json()
-  }
-
+export const listaEsperienze = async (userId) => {
+  const response = await fetch(fetchUrl + userId + "/experiences", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: apiToken,
+    },
+  });
+  const dataEsperienze = await response.json();
+  return dataEsperienze;
+};
