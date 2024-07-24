@@ -4,6 +4,8 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Profile from "./pages/Profile";
 import { NotFound } from "./pages/NotFound";
 import Experience from "./components/Experience";
+import Footer from "./components/Footer";
+import AsideCard from "./components/AsideCard";
 
 function App() {
   return (
@@ -26,23 +28,17 @@ function App() {
                 <Route path="/404" element={<NotFound />} />
                 <Route path="*" element={<Navigate to="/404" />} />
               </Routes>
-              <Experience/>
+              <Experience />
             </Col>
             <Col lg={3} className="border">
-              <h2>ASIDE</h2>
+              <aside>
+                <AsideCard />
+              </aside>
             </Col>
           </Row>
         </Container>
       </main>
-      <footer>
-        <Container fluid>
-          <Row>
-            <Col className="border">
-              <h2>FOOTER</h2>
-            </Col>
-          </Row>
-        </Container>
-      </footer>
+      <Footer />
     </BrowserRouter>
   );
 }
