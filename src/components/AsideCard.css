@@ -1,0 +1,25 @@
+button{
+color: black !important;
+border: solid 2px black !important;
+width: 120px !important;
+border-radius: 30px !important;
+height: 40px !important;
+margin-bottom: 20px !important;
+}
+.img{
+border-radius: 50% !important;
+width: 50px !important;
+height: 50px !important;
+margin-right: 10px;
+margin-top: 5px;
+}
+.item{
+    border: none;
+    margin-bottom: 10px !important;
+}
+button svg{
+    height: 30px;
+    margin: 0;
+    width: 30px;
+
+}

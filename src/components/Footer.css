@@ -1,0 +1,25 @@
+.rimuoviPunti li{
+    list-style-type: none!important;
+    margin-bottom: 10px;
+  }
+  
+  svg{
+    margin-top: 5px;
+    margin-right: 5px;
+  }
+  li{
+    font-size: smaller;
+    list-style: none
+  }
+  li:hover{
+    text-decoration: underline;
+  }
+  .align-self-center li a{
+    font-size: medium;
+  }
+  button:hover{
+text-decoration: underline;
+  }
+  svg + div{
+    margin-bottom: 10px;
+  }
