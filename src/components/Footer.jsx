@@ -99,7 +99,6 @@ function Footer() {
               </div>
               <div className="d-flex">
                 <IcoEdit />
-
                 <div>
                   <li>
                     <a>Gestisci il tuo account e la tua privacy</a>
