@@ -11,18 +11,5 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-.rimuoviPunti{
-  list-style-type: none!important;
-}
 
-svg{
-  margin-top: 5px;
-  margin-right: 5px;
-}
-li{
-  font-size: smaller;
-  list-style: none
-}
-.align-self-center li a{
-  font-size: medium;
-}
+

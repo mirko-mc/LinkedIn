@@ -1,17 +1,29 @@
-import { Col, Container, Row, } from "react-bootstrap";
+import { Col, Container, Row, Dropdown } from "react-bootstrap";
 import Select from "./Select";
+import './Footer.css';
+
 
 function Footer() {
     return (
         <>
             <Container fluid>
                 <Row className="bg-dark">
-                    <Col sm={12} md={5}>
+                    <Col sm={12} md={6}>
                         <div className="d-flex">
                             <ul className="rimuoviPunti text-white mt-5 p-4 ">
-                                <li><a href="#"></a>informazioni</li>
+                                <li><a></a>informazioni</li>
                                 <li><a href="#"></a>Informativa sulla community professionale</li>
-                                <li><a href="#"></a>Privacy e condizioni </li>
+                                <li className="nav-item dropdown">
+                                    <button className="bg-dark text-white border-0 btn-dark dropdown-toggle p-0 " data-bs-toggle="dropdown" aria-expanded="false">
+                                        Privacy e condizioni
+                                    </button>
+                                    <ul className="dropdown-menu dropdown-menu-dark">
+                                        <li><a className="dropdown-item" href="#">Informativa sulla privacy</a></li>
+                                        <li><a className="dropdown-item" href="#">Contratto di licenza</a></li>
+                                        <li><a className="dropdown-item" href="#">Informativa sui cookie</a></li>
+                                    </ul>
+                                </li>
+
                                 <li><a href="#"></a>Sales Solutions</li>
                                 <li><a href="#"></a>Centro sicurezza</li>
                                 <li><a href="#"></a>LinkedIn Corporation © 2024</li>
@@ -35,7 +47,7 @@ function Footer() {
 
 
                     </Col>
-                    <Col className="align-self-center text-white" sm={12} md={5}>
+                    <Col className="align-self-center text-white" sm={12} md={3}>
                         <div >
                             <div className="d-flex">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-question-circle-fill" viewBox="0 0 16 16">
@@ -66,14 +78,14 @@ function Footer() {
                                 </div>
                             </div>
                         </div>
-                       
+
                     </Col>
 
-                    <Col md={2}>
-                    <Select/>
+                    <Col md={3} className="mt-5 ps-0 pe-5">
+                        <Select />
                     </Col>
                 </Row>
-                </Container >
+            </Container >
 
         </>
     )
