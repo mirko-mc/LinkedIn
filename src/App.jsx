@@ -6,19 +6,14 @@ import { NotFound } from "./pages/NotFound";
 import Experience from "./components/Experience";
 import Footer from "./components/Footer";
 import AsideCard from "./components/AsideCard";
+import NavbarP from "./components/NavbarP";
 
 function App() {
   return (
     <BrowserRouter>
-      <header>
-        <Container fluid>
-          <Row>
-            <Col className="border">
-              <h2>HEADER</h2>
-            </Col>
-          </Row>
-        </Container>
-      </header>
+      <nav className="mb-5">
+        <NavbarP />
+      </nav>
       <main>
         <Container>
           <Row>
