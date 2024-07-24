@@ -13,7 +13,7 @@ function App() {
       <header>
         <Container fluid>
           <Row>
-            <Col className="border">
+            <Col>
               <h2>HEADER</h2>
             </Col>
           </Row>
@@ -22,7 +22,7 @@ function App() {
       <main>
         <Container>
           <Row>
-            <Col lg={9} className="border">
+            <Col lg={9}>
               <Routes>
                 <Route path="/" element={<Profile />} />
                 <Route path="/404" element={<NotFound />} />
@@ -30,7 +30,7 @@ function App() {
               </Routes>
               <Experience />
             </Col>
-            <Col lg={3} className="border">
+            <Col lg={3}>
               <aside>
                 <AsideCard />
               </aside>
