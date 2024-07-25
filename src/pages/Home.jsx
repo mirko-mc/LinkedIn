@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom"
+import { Navigate } from "react-router-dom";
 
 function Home() {
-  return <Link to="/profile">Vai al profilo</Link>
+  return <Navigate to="/profile" />;
 }
-export default Home
+export default Home;

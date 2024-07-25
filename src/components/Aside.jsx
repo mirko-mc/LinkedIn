@@ -1,31 +1,31 @@
 import AsideCard from "./AsideCard";
 import { useState, useEffect } from "react";
 import { listaProfili } from "../data/fetch";
-
 function Aside() {
-    const [aside, setAside] = useState([]);
-    useEffect(() => {
+  const [profiles, setProfiles] = useState([]);
 
-        listaProfili().then((dati) =>{
-          return setAside(dati)
-          
-        }
-        );
-    }, []);
-    const profileToRender = []
-    for (let i = 0; i < 5; i++) {
-        let randNum = Math.round(Math.random() * aside.length);
-        profileToRender.push(aside[randNum]);
-        console.log(profileToRender)
+  const [profileToRender, setProfileToRender] = useState([]);
+
+  useEffect(() => {
+    listaProfili().then((data) => {
+      setProfiles(data);
+      const temp = [];
+      for (let i = 0; i < 5; i++) {
+        const randNum = Math.round(Math.random() * data.length - 1);
+        temp.push(data[randNum]);
       }
-    
-    return (
-        <>
-            <h2>Cerca profilo</h2>
-            {profileToRender.map((profilo) => (
-                <AsideCard key={profilo._id} profilo={profilo}/>
-            ))}
-        </>
-    );
+      setProfileToRender(temp);
+    });
+  }, []);
+
+  return (
+    <>
+      <h2>Cerca profilo</h2>
+      {profiles.length &&
+        profileToRender.map((profilo) => (
+          <AsideCard key={profilo._id} profilo={profilo} />
+        ))}
+    </>
+  );
 }
 export default Aside;
