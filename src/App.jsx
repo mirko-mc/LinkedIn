@@ -5,8 +5,8 @@ import Profile from "./pages/Profile";
 import { NotFound } from "./pages/NotFound";
 import Experience from "./components/Experience";
 import Footer from "./components/Footer";
-import AsideCard from "./components/AsideCard";
 import MyNavBar from "./components/MyNavBar";
+import Aside from "./components/Aside"
 
 function App() {
   return (
@@ -27,7 +27,7 @@ function App() {
             </Col>
             <Col lg={3}>
               <aside>
-                <AsideCard />
+                <Aside/>
               </aside>
             </Col>
           </Row>
