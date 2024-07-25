@@ -1,7 +1,7 @@
 import { Card } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import "./AsideCard.css";
-import { IcoSearch } from "../assets/svg/svg";
+import { IcoSearch } from "../assets/svg/IcoSvg";
 
 function AsideCard() {
   return (

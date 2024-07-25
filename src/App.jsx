@@ -5,14 +5,14 @@ import Profile from "./pages/Profile";
 import { NotFound } from "./pages/NotFound";
 import Experience from "./components/Experience";
 import Footer from "./components/Footer";
+import MyNavBar from "./components/MyNavBar";
 import Aside from "./components/Aside"
-import NavbarP from "./components/NavbarP";
 
 function App() {
   return (
     <BrowserRouter>
       <nav className="mb-5">
-        <NavbarP />
+        <MyNavBar/>
       </nav>
       <main>
         <Container>
