@@ -2,21 +2,22 @@ import { Card, ListGroupItem, } from "react-bootstrap"
 import Button from 'react-bootstrap/Button';
 import "./AsideCard.css"
 
-function AsideCard() {
+function AsideCard({profilo}) {
     return (
         <>
             <div className="d-flex">
 
                 <Card.Img className="img"
                     variant="top"
-                    src="https://png.pngtree.com/png-clipart/20211008/ourmid/pngtree-question-mark-icon-png-image_3975287.png">
+                    src={profilo.image}>
 
                 </Card.Img>
 
                 <Card.Body>
-                    <Card.Title>Marcello Ascani</Card.Title>
+                    <Card.Title>{profilo.name}</Card.Title>
                     <p className="item">
-                        <ListGroupItem >CEO 6 Co-founder di flatmates</ListGroupItem>
+                        <ListGroupItem >{profilo.surname}</ListGroupItem>
+                        <ListGroupItem >{profilo.email}</ListGroupItem>
 
                     </p>
                     <Button variant="light"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
