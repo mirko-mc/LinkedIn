@@ -7,6 +7,7 @@ import Experience from "./components/Experience";
 import Footer from "./components/Footer";
 import AsideCard from "./components/AsideCard";
 import { ProfileContextProvider } from "./context/ProfileContext";
+import Home from "./pages/Home";
 
 function App() {
   return (
@@ -26,11 +27,11 @@ function App() {
             <Row>
               <Col lg={9}>
                 <Routes>
-                  <Route path="/" element={<Profile />} />
+                  <Route path="/" element={<Home />} />
+                  <Route path="/profile" element={<Profile />} />
                   <Route path="/404" element={<NotFound />} />
                   <Route path="/*" element={<Navigate to="/404" />} />
                 </Routes>
-                <Experience />
               </Col>
               <Col lg={3}>
                 <aside>
