@@ -5,7 +5,7 @@ import Profile from "./pages/Profile";
 import { NotFound } from "./pages/NotFound";
 import Experience from "./components/Experience";
 import Footer from "./components/Footer";
-import AsideCard from "./components/AsideCard";
+import Aside from "./components/Aside"
 import NavbarP from "./components/NavbarP";
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
             </Col>
             <Col lg={3}>
               <aside>
-                <AsideCard />
+                <Aside/>
               </aside>
             </Col>
           </Row>
