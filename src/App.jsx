@@ -6,23 +6,18 @@ import { NotFound } from "./pages/NotFound";
 import Experience from "./components/Experience";
 import Footer from "./components/Footer";
 import Aside from "./components/Aside"
+import NavbarP from "./components/NavbarP";
 
 function App() {
   return (
     <BrowserRouter>
-      <header>
-        <Container fluid>
-          <Row>
-            <Col className="border">
-              <h2>HEADER</h2>
-            </Col>
-          </Row>
-        </Container>
-      </header>
+      <nav className="mb-5">
+        <NavbarP />
+      </nav>
       <main>
         <Container>
           <Row>
-            <Col lg={9} className="border">
+            <Col lg={9}>
               <Routes>
                 <Route path="/" element={<Profile />} />
                 <Route path="/404" element={<NotFound />} />
@@ -30,7 +25,7 @@ function App() {
               </Routes>
               <Experience />
             </Col>
-            <Col lg={3} className="border">
+            <Col lg={3}>
               <aside>
                 <Aside/>
               </aside>

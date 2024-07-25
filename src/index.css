@@ -12,4 +12,37 @@ code {
     monospace;
 }
 
+nav form .form-control:focus {
+  box-shadow: none!important;
+  border: 2px solid black;
+}
+
+nav {
+  border: 1px grey;
+}
+
+/* @media only screen and (max-width: 576px) {
+  nav a{
+    margin-right: 0px!important;
+  }
+} */
+
+@media only screen and (max-width: 576px) {
+  .icoMobile{
+    display: none;
+  }
+  nav .form-control {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 576px) {
+  .icoMobile{
+    display: block;
+  }
+}
+
+
+
+
 
