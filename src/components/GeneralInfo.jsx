@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   Button,
   Card,
   Col,
+  DropdownDivider,
   ListGroup,
   ListGroupItem,
   Row,
@@ -10,11 +11,12 @@ import {
 import { cercaProfilo } from "../data/fetch";
 import { Link } from "react-router-dom";
 import "./GeneralInfo.css";
+import { ProfileContext } from "../context/ProfileContext";
 
 function GeneralInfo() {
-  const [profile, setProfile] = useState({});
+  const { profile, setProfile } = useContext(ProfileContext);
   useEffect(() => {
-    cercaProfilo("6551e7bbc55e7e0018f83bfb").then((data) => setProfile(data));
+    cercaProfilo("6551e7bbc55e7e0018f83bfb").then((data) => setProfile(data)).catch(err => alert(err.message));
     console.log(profile);
   }, []);
   return (

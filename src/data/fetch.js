@@ -50,6 +50,7 @@ export const cercaProfilo = async (userId) => {
       Authorization: apiToken,
     },
   });
+  if (!response.ok) throw new Error(`${response.status} - ${response.statusText}`);
   const dataRicerca = await response.json();
   return dataRicerca;
 };
