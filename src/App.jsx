@@ -3,25 +3,19 @@ import "./App.css";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Profile from "./pages/Profile";
 import { NotFound } from "./pages/NotFound";
-import Experience from "./components/Experience";
 import Footer from "./components/Footer";
-import AsideCard from "./components/AsideCard";
 import { ProfileContextProvider } from "./context/ProfileContext";
 import Home from "./pages/Home";
+import MyNavBar from "./components/MyNavBar";
+import Aside from "./components/Aside"
 
 function App() {
   return (
     <BrowserRouter>
       <ProfileContextProvider>
-        <header>
-          <Container fluid>
-            <Row>
-              <Col>
-                <h2>HEADER</h2>
-              </Col>
-            </Row>
-          </Container>
-        </header>
+        <nav className="mb-5">
+        <MyNavBar/>
+      </nav>
         <main>
           <Container>
             <Row>
@@ -35,7 +29,7 @@ function App() {
               </Col>
               <Col lg={3}>
                 <aside>
-                  <AsideCard />
+                  <Aside/>
                 </aside>
               </Col>
             </Row>

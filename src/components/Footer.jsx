@@ -1,7 +1,7 @@
-import { Col, Container, Row, Dropdown } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import Select from "./Select";
 import "./Footer.css";
-import { IcoClose, IcoDelete, IcoEdit } from "../assets/svg/svg";
+import { IcoClose, IcoIngranaggio, IcoScudo } from "../assets/svg/IcoSvg";
 
 function Footer() {
   return (
@@ -98,8 +98,7 @@ function Footer() {
                 </div>
               </div>
               <div className="d-flex">
-                <IcoEdit />
-
+                <IcoIngranaggio />
                 <div>
                   <li>
                     <a>Gestisci il tuo account e la tua privacy</a>
@@ -108,7 +107,7 @@ function Footer() {
                 </div>
               </div>
               <div className="d-flex">
-                <IcoDelete />
+                <IcoScudo />
                 <div>
                   <li>
                     <a>Trasparenza sui contenuti consigliati</a>
