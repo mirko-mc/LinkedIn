@@ -38,6 +38,7 @@ export const ilTuoProfilo = async () => {
       Authorization: apiToken,
     },
   });
+  if (!response.ok) throw new Error(`${response.status} - ${response.statusText}`);
   const dataProfilo = await response.json();
   return dataProfilo;
 };

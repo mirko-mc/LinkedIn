@@ -8,7 +8,7 @@ import {
   ListGroupItem,
   Row,
 } from "react-bootstrap";
-import { cercaProfilo } from "../data/fetch";
+import { cercaProfilo, ilTuoProfilo } from "../data/fetch";
 import { Link } from "react-router-dom";
 import "./GeneralInfo.css";
 import { ProfileContext } from "../context/ProfileContext";
@@ -16,7 +16,7 @@ import { ProfileContext } from "../context/ProfileContext";
 function GeneralInfo() {
   const { profile, setProfile } = useContext(ProfileContext);
   useEffect(() => {
-    cercaProfilo("6551e7bbc55e7e0018f83bfb").then((data) => setProfile(data)).catch(err => alert(err.message));
+    ilTuoProfilo().then((data) => setProfile(data)).catch(err => alert(err.message));
     console.log(profile);
   }, []);
   return (
