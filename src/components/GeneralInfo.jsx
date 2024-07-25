@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import {
   Button,
   Card,
@@ -7,18 +7,22 @@ import {
   ListGroupItem,
   Row,
 } from "react-bootstrap";
-import { cercaProfilo } from "../data/fetch";
 import { Link } from "react-router-dom";
+import "./GeneralInfo.css";
+import { ProfileContext } from "../context/ProfileContext";
 
 function GeneralInfo() {
-  const [profile, setProfile] = useState({});
-  useEffect(() => {
-    cercaProfilo("6551e7bbc55e7e0018f83bfb").then((data) => setProfile(data));
-    console.log(profile);
-  }, []);
+  const { profile, setProfile } = useContext(ProfileContext);
   return (
     <Card>
-      <Card.Header>
+      <Card.Header className="position-relative">
+        <Card.Img
+          variant="top"
+          id="proPic"
+          src={profile.image}
+          height={"150px"}
+          className="rounded-circle w-auto position-absolute start-5 border border-3"
+        />
         <Card.Img variant="top" src={profile.image} height={"150px"} />
       </Card.Header>
       <Card.Body>
@@ -27,8 +31,8 @@ function GeneralInfo() {
             <Card.Title>{`${profile.name} ${profile.surname}`}</Card.Title>
             <Card.Text>{profile.title}</Card.Text>
             <ListGroup horizontal>
-              <ListGroupItem>{profile.area}</ListGroupItem>
-              <ListGroupItem>
+              <ListGroupItem className="border-0">{profile.area}</ListGroupItem>
+              <ListGroupItem className="border-0">
                 <Link to="#">Informazioni di contatto</Link>
               </ListGroupItem>
             </ListGroup>
