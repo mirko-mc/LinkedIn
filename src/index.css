@@ -21,11 +21,17 @@ nav {
   border: 1px grey;
 }
 
-/* @media only screen and (max-width: 576px) {
-  nav a{
+@media only screen and (max-width: 576px) {
+  .marginIco{
     margin-right: 0px!important;
   }
-} */
+}
+
+@media only screen and (min-width: 576px) {
+  .marginIco{
+    margin-right: 2rem!important;
+  }
+}
 
 @media only screen and (max-width: 576px) {
   .icoMobile{
@@ -39,6 +45,16 @@ nav {
 @media only screen and (min-width: 576px) {
   .icoMobile{
     display: block;
+  }
+}
+
+.icoSearch {
+  width: 30px;
+}
+
+@media only screen and (min-width: 576px) {
+  .icoSearch {
+    display: none;
   }
 }
 
