@@ -1,14 +1,15 @@
-import { Nav, Navbar, NavDropdown, Form, Container } from "react-bootstrap";
+import { Nav, Navbar, Dropdown, Form, Container } from "react-bootstrap";
 import { IcoHome, IcoLavoro, IcoLinkedin, IcoMessaggistica, IcoNotifiche, IcoRete, IcoSearch } from "../assets/svg/IcoSvg";
 
 function MyNavBar() {
   return (
     <Navbar expand="lg">
-      <Container  fluid>
+      <Container>
+      <div className="d-flex align-items-center">
         <Navbar.Brand href="#">
           <IcoLinkedin />
         </Navbar.Brand>
-        <Form className="d-flex">
+        <Form>
           <Form.Control
             type="search"
             placeholder="Search"
@@ -16,8 +17,10 @@ function MyNavBar() {
             aria-label="Search"
           />
         </Form>
+        </div>
+        <div className="d-flex">     
         <IcoSearch />
-        <Nav.Link className="text-center marginIco">
+        <Nav.Link className="text-center marginIco hoverBlack">
         <IcoHome />
           <span className="icoMobile">Home</span>
         </Nav.Link>
@@ -43,21 +46,20 @@ function MyNavBar() {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <NavDropdown title="Link" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action5">
-                Something else here
-              </NavDropdown.Item>
-            </NavDropdown>
-            <Nav.Link href="#" disabled>
-              Link
-            </Nav.Link>
+          <Dropdown>
+            <Dropdown.Toggle variant="success" id="dropdown-basic">
+              Tu
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+              <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+              <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
           </Nav>
         </Navbar.Collapse>
+        </div>
       </Container>
     </Navbar>
   );
