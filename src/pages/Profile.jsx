@@ -2,7 +2,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import Experience from "../components/Experience";
 import GeneralInfo from "../components/GeneralInfo";
 import Aside from "../components/Aside";
-
+import "./Profile.css";
 function Profile() {
   return (
     <Container>

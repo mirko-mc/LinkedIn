@@ -3,14 +3,12 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Profile from "./pages/Profile";
 import { NotFound } from "./pages/NotFound";
 import Footer from "./components/Footer";
-import { ProfileContextProvider } from "./context/ProfileContext";
 import Home from "./pages/Home";
 import MyNavBar from "./components/MyNavBar";
 
 function App() {
   return (
     <BrowserRouter>
-      <ProfileContextProvider>
         <nav className="mb-5">
           <MyNavBar />
         </nav>
@@ -23,7 +21,6 @@ function App() {
           </Routes>
         </main>
         <Footer />
-      </ProfileContextProvider>
     </BrowserRouter>
   );
 }

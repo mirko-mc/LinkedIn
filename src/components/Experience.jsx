@@ -1,14 +1,16 @@
 import { useContext, useEffect, useState } from "react";
 import { listaEsperienze } from "../data/fetch";
 import CardExperience from "./CardExperience";
-import { ProfileContext } from "../context/ProfileContext";
+import { MyProfileContext } from "../context/MyProfileContext";
 
 function Experience() {
-  const { profile, setProfile } = useContext(ProfileContext);
+  const { myProfile, setMyProfile } = useContext(MyProfileContext);
   const [experienceList, setExperienceList] = useState([]);
   useEffect(() => {
-    listaEsperienze(profile._id).then((data) => setExperienceList(data));
-    listaEsperienze("6551e7bbc55e7e0018f83bfb").then((data) => setExperienceList(data));
+    listaEsperienze(myProfile._id)
+      .then((data) => setExperienceList(data))
+      .catch((error) => console.log(error));
+    // listaEsperienze("6551e7bbc55e7e0018f83bfb").then((data) => setExperienceList(data));
   }, []);
   console.log(experienceList.length);
   if (experienceList.length === 0)

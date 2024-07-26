@@ -1,4 +1,12 @@
-import { Card, Col, DropdownDivider, ListGroup, ListGroupItem, Row } from "react-bootstrap";
+import {
+  Card,
+  Col,
+  DropdownDivider,
+  ListGroup,
+  ListGroupItem,
+  Row,
+} from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 function CardExperience({ exp }) {
   return (
@@ -22,9 +30,6 @@ function CardExperience({ exp }) {
               <ListGroup horizontal>
                 <ListGroupItem>{exp.startDate}</ListGroupItem>
                 <ListGroupItem>
-                  {/* se il termine dell'esperienza è null
-                  allora scrivi "presente"
-                  altrimenti scrivi il termine dell'esperienza */}
                   {exp.endDate === null ? "presente" : exp.endDate}
                 </ListGroupItem>
                 <ListGroupItem>4 anni 7 mesi</ListGroupItem>
@@ -32,9 +37,9 @@ function CardExperience({ exp }) {
               <p>{exp.area}</p>
             </ListGroup>
             {exp.description && <Card.Text>{exp.description}</Card.Text>}
-            <a href="#">react.js, gitub</a>
+            <Link to="#">react.js, gitub</Link>
           </Card.Body>
-          <DropdownDivider/>
+          <DropdownDivider />
         </Col>
       </Row>
     </Card>
