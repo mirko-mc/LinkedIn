@@ -4,8 +4,6 @@ import Profile from "./pages/Profile";
 import { NotFound } from "./pages/NotFound";
 import Footer from "./components/Footer";
 import MyNavBar from "./components/MyNavBar";
-import { MyProfileContext } from "./context/MyProfileContext";
-import { useContext, useEffect, useState } from "react";
 
 function App() {
   return (

@@ -2,12 +2,9 @@ import { Card } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import "./AsideCard.css";
 import { IcoFollow, IcoOmino } from "../assets/svg/IcoSvg";
-import { MyProfileContext } from "../context/MyProfileContext";
-import { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function AsideCard({ profilo, type }) {
-  const navigate = useNavigate();
   return (
     <>
       <div className="d-flex borAside">

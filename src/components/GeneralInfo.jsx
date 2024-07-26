@@ -12,7 +12,7 @@ import "./GeneralInfo.css";
 import { MyProfileContext } from "../context/MyProfileContext";
 import { cercaProfilo } from "../data/fetch";
 function GeneralInfo({ id }) {
-  const { myProfile, setMyProfile } = useContext(MyProfileContext);
+  const { myProfile } = useContext(MyProfileContext);
   const [user, setUser] = useState({});
   // verificare che id myPr e id prop siano uguali
   // se uguali usare context altrimenti fetch

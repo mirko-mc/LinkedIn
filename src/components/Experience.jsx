@@ -1,10 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { listaEsperienze } from "../data/fetch";
 import CardExperience from "./CardExperience";
-import { MyProfileContext } from "../context/MyProfileContext";
 
 function Experience({ id }) {
-  const { myProfile, setMyProfile } = useContext(MyProfileContext);
   const [experienceList, setExperienceList] = useState([]);
   useEffect(() => {
     // listaEsperienze("65ae3ed3600be100183a8698")
