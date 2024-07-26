@@ -20,8 +20,10 @@ function GeneralInfo({ id }) {
   useEffect(() => {
     myProfile?._id === id
       ? setUser(myProfile)
-      : setUser(cercaProfilo(id).then((data) => setUser(data)));
-  }, [id]);
+      : cercaProfilo(id)
+          .then((data) => setUser(data))
+          .catch((error) => console.log(error));
+  }, [id, myProfile]);
   return (
     <Card>
       <Card.Header className="position-relative">
