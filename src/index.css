@@ -12,7 +12,7 @@ code {
     monospace;
 }
 
-nav form .form-control:focus {
+nav .form-control:focus {
   box-shadow: none!important;
   border: 2px solid black;
 }
@@ -21,15 +21,19 @@ nav {
   border: 1px grey;
 }
 
+.hoverBlack:hover{
+  color: black
+}
+
 @media only screen and (max-width: 576px) {
   .marginIco{
-    margin-right: 0px!important;
+    margin-right: 12px!important;
   }
 }
 
 @media only screen and (min-width: 576px) {
   .marginIco{
-    margin-right: 2rem!important;
+    margin-right: 3rem!important;
   }
 }
 

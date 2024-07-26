@@ -12,7 +12,7 @@ function Profile() {
           <Experience />
         </Col>
         <Col lg={3}>
-          <Aside />
+          <Aside /> 
         </Col>
       </Row>
     </Container>
