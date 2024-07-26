@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   Button,
   Card,
@@ -9,30 +9,50 @@ import {
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./GeneralInfo.css";
-import { ProfileContext } from "../context/ProfileContext";
-
-function GeneralInfo() {
-  const { profile, setProfile } = useContext(ProfileContext);
+import { MyProfileContext } from "../context/MyProfileContext";
+import { cercaProfilo } from "../data/fetch";
+function GeneralInfo({ id }) {
+  const { myProfile, setMyProfile } = useContext(MyProfileContext);
+  const [user, setUser] = useState({});
+  // verificare che id myPr e id prop siano uguali
+  // se uguali usare context altrimenti fetch
+  // usare stato terzo contenente dati context o fetch
+  useEffect(() => {
+    myProfile?._id === id
+      ? setUser(myProfile)
+      : setUser(cercaProfilo(id).then((data) => setUser(data)));
+  }, [id]);
   return (
     <Card>
       <Card.Header className="position-relative">
         <Card.Img
           variant="top"
           id="proPic"
-          src={profile.image}
+          src={user.image}
           height={"150px"}
           className="rounded-circle w-auto position-absolute start-5 border border-3"
         />
-        <Card.Img variant="top" src={profile.image} height={"150px"} />
+        <Card.Img variant="top" src={user.image} height={"150px"} />
       </Card.Header>
       <Card.Body>
         <Row>
           <Col lg={8}>
-            <Card.Title>{`${profile.name} ${profile.surname}`}</Card.Title>
-            <Card.Text>{profile.title}</Card.Text>
+            <ul className="list-group list-group-horizontal ">
+              <li className="list-group-item p-0 border-0">
+                <Card.Title>{`${user.name} ${user.surname}`}</Card.Title>
+              </li>
+              <li className="list-group-item p-0 border-0 central-dot">1°</li>
+            </ul>
+            <Card.Text>{user.title}</Card.Text>
+            <ul className="list-group list-group-horizontal ">
+              <li className="list-group-item p-0 border-0">{user.area}</li>
+              <li className="list-group-item p-0 border-0 central-dot">
+                <Link to="#">Informazioni di contatto</Link>
+              </li>
+            </ul>
             <ListGroup horizontal>
-              <ListGroupItem className="border-0">{profile.area}</ListGroupItem>
-              <ListGroupItem className="border-0">
+              <ListGroupItem className="p-0 border-0"></ListGroupItem>
+              <ListGroupItem className="p-0 border-0 centralDot">
                 <Link to="#">Informazioni di contatto</Link>
               </ListGroupItem>
             </ListGroup>
@@ -51,8 +71,8 @@ function GeneralInfo() {
                 className="rounded-circle w-auto"
               />
               <Card.Text>
-                {profile.name} {profile.surname}, {profile.name}{" "}
-                {profile.surname} e altri 2 collegamenti in comune
+                {user.name} {user.surname}, {user.name} {user.surname} e altri 2
+                collegamenti in comune
               </Card.Text>
             </Row>
           </Col>
@@ -65,7 +85,7 @@ function GeneralInfo() {
                 height={"50px"}
                 className="w-auto"
               />
-              <Card.Text>{profile.title}</Card.Text>
+              <Card.Text>{user.title}</Card.Text>
               <Card.Img
                 variant="top"
                 src="https://png.pngtree.com/png-clipart/20211008/ourmid/pngtree-question-mark-icon-png-image_3975287.png"

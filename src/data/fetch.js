@@ -10,6 +10,8 @@ export const listaProfili = async () => {
       Authorization: apiToken,
     },
   });
+  if (!response.ok)
+    throw new Error(`${response.status} - ${response.statusText}`);
   const dataProfili = await response.json();
   return dataProfili;
 };
@@ -38,8 +40,8 @@ export const cercaProfilo = async (userId) => {
       Authorization: apiToken,
     },
   });
-  if (!response.ok)
-    throw new Error(`${response.status} - ${response.statusText}`);
+  // if (!response.ok)
+    // throw new Error(response.status,response.statusText);
   const dataRicerca = await response.json();
   return dataRicerca;
 };
@@ -53,6 +55,8 @@ export const listaEsperienze = async (userId) => {
       Authorization: apiToken,
     },
   });
+  if (!response.ok)
+    throw new Error(`${response.status} - ${response.statusText}`);
   const dataEsperienze = await response.json();
   return dataEsperienze;
 };

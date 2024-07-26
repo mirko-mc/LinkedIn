@@ -2,15 +2,22 @@ import { Card } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import "./AsideCard.css";
 import { IcoFollow, IcoOmino } from "../assets/svg/IcoSvg";
-
 function AsideCard({ profilo, type }) {
+import { MyProfileContext } from "../context/MyProfileContext";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
+function AsideCard({ profilo }) {
+  const navigate = useNavigate();
   return (
     <>
       <div className="d-flex borAside">
         <Card.Img className="img" variant="top" src={profilo.image}></Card.Img>
-
         <Card.Body>
-          <Card.Title><h6 className="mb-0">{`${profilo.name} ${profilo.surname}`}</h6></Card.Title>
+          <Card.Title
+            as={Link}
+            to={`/profile/${profilo._id}`}
+          >{`${profilo.name} ${profilo.surname}`}</Card.Title>
           <div className="item">
             <p className="m-0">{profilo.title}</p>
             <p className="mb-1">{profilo.bio}</p>
