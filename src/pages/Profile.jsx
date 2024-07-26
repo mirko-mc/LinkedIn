@@ -6,6 +6,7 @@ import "./Profile.css";
 import { useParams } from "react-router-dom";
 import { MyProfileContext } from "../context/MyProfileContext";
 import { useContext, useEffect, useState } from "react";
+
 function Profile() {
   const { myProfile } = useContext(MyProfileContext);
   const { id } = useParams();

@@ -1,9 +1,9 @@
-button{
+.buttonAside{
 color: black !important;
 border: solid 2px black !important;
 width: 120px !important;
 border-radius: 30px !important;
-height: 40px !important;
+height: 38px !important;
 margin-bottom: 20px !important;
 }
 .img{
@@ -15,11 +15,10 @@ margin-top: 5px;
 }
 .item{
     border: none;
-    margin-bottom: 10px !important;
+    
 }
-button svg{
-    height: 30px;
-    margin: 0;
-    width: 30px;
 
+.borAside{
+    border-bottom: solid 1px rgb(218, 209, 209);
+    margin-bottom: 20px;
 }
