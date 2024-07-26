@@ -1,6 +1,7 @@
-import { Navigate } from "react-router-dom";
+import Profile from "./Profile";
 
 function Home() {
-  return <Navigate to="/profile" />;
+  console.log("sono in home");
+  return <Profile/>;
 }
 export default Home;

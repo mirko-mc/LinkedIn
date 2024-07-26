@@ -3,16 +3,15 @@ import { listaEsperienze } from "../data/fetch";
 import CardExperience from "./CardExperience";
 import { MyProfileContext } from "../context/MyProfileContext";
 
-function Experience() {
+function Experience({ id }) {
   const { myProfile, setMyProfile } = useContext(MyProfileContext);
   const [experienceList, setExperienceList] = useState([]);
   useEffect(() => {
-    listaEsperienze(myProfile._id)
+    // listaEsperienze("65ae3ed3600be100183a8698")
+    listaEsperienze(id)
       .then((data) => setExperienceList(data))
       .catch((error) => console.log(error));
-    // listaEsperienze("6551e7bbc55e7e0018f83bfb").then((data) => setExperienceList(data));
-  }, []);
-  console.log(experienceList.length);
+  }, [id]);
   if (experienceList.length === 0)
     return (
       <>
