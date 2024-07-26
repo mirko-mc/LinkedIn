@@ -1,40 +1,41 @@
-import { Card, Col, DropdownDivider, ListGroup, ListGroupItem, Row } from "react-bootstrap";
+import { Card, Col, DropdownDivider, ListGroup, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 function CardExperience({ exp }) {
   return (
     <Card>
       <Row>
         <Col lg={2}>
-          <Card.Img
-            variant="top"
-            src="https://png.pngtree.com/png-clipart/20211008/ourmid/pngtree-question-mark-icon-png-image_3975287.png"
-          />
+          <Card.Img variant="top" src={exp.image} />
         </Col>
         <Col lg={10}>
           <Card.Body>
             <Card.Title>{exp.company}</Card.Title>
             <ListGroup horizontal>
-              <ListGroupItem>{exp.role}</ListGroupItem>
-              <ListGroupItem>4 anni 7 mesi</ListGroupItem>
+              <li className="list-group-item p-0 border-0">{exp.role}</li>
+              <li className="list-group-item p-0 border-0 central-dot">
+                4 anni 7 mesi
+              </li>
             </ListGroup>
             <ListGroup>
-              <ListGroupItem>{exp.role}</ListGroupItem>
+              <li>{exp.role}</li>
               <ListGroup horizontal>
-                <ListGroupItem>{exp.startDate}</ListGroupItem>
-                <ListGroupItem>
-                  {/* se il termine dell'esperienza è null
-                  allora scrivi "presente"
-                  altrimenti scrivi il termine dell'esperienza */}
+                <li className="list-group-item p-0 border-0">
+                  {exp.startDate}
+                </li>
+                <li className="list-group-item p-0 border-0 central-dot">
                   {exp.endDate === null ? "presente" : exp.endDate}
-                </ListGroupItem>
-                <ListGroupItem>4 anni 7 mesi</ListGroupItem>
+                </li>
+                <li className="list-group-item p-0 border-0 central-dot">
+                  4 anni 7 mesi
+                </li>
               </ListGroup>
               <p>{exp.area}</p>
             </ListGroup>
             {exp.description && <Card.Text>{exp.description}</Card.Text>}
-            <a href="#">react.js, gitub</a>
+            <Link to="#">react.js, gitub</Link>
           </Card.Body>
-          <DropdownDivider/>
+          <DropdownDivider />
         </Col>
       </Row>
     </Card>
