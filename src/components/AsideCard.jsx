@@ -2,12 +2,11 @@ import { Card } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import "./AsideCard.css";
 import { IcoFollow, IcoOmino } from "../assets/svg/IcoSvg";
-function AsideCard({ profilo, type }) {
 import { MyProfileContext } from "../context/MyProfileContext";
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-function AsideCard({ profilo }) {
+function AsideCard({ profilo, type }) {
   const navigate = useNavigate();
   return (
     <>
