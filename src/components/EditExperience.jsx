@@ -2,31 +2,51 @@ import { useState } from "react";
 import { Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { creaEsperienza } from "../data/fetch";
+import { getExperience, putExperience } from "../data/fetch";
 
-function EditExperience({ show, id, handleClose }) {
+function EditExperience({ exp, showEditExperience, handleClose }) {
+  // getExperience(exp.user, exp._id).then((data) => console.log(data));
+  console.log(exp);
+  const startDate = new Date(exp.startDate);
+  const endDate = new Date(exp.endDate);
+  const formattedStartDate = startDate.toISOString().split("T")[0];
+  const formattedEndDate = endDate.toISOString().split("T")[0];
+
   const initialFormData = {
-    area: "",
-    company: "",
-    description: "",
-    endDate: "",
-    image: "",
-    role: "",
-    startDate: "",
+    area: exp.area,
+    company: exp.company,
+    description: exp.description,
+    endDate: formattedEndDate,
+    image: exp.image,
+    role: exp.role,
+    startDate: formattedStartDate,
+  };
+  const clearForm = () => {
+    setFormData({
+      area: "",
+      company: "",
+      description: "",
+      endDate: "",
+      image: "",
+      role: "",
+      startDate: "",
+    });
   };
   const [formData, setFormData] = useState(initialFormData);
   const handleOnChange = (event) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value });
+    event.preventDefault();
+    const target = event.target;
+    setFormData({ ...formData, [target.name]: target.value });
   };
-  const handleSave = () => {
-    creaEsperienza(id, formData)
+  const handleEdit = () => {
+    putExperience(exp.user, exp._id, formData)
       .catch((error) => console.log(error))
       .finally(handleClose());
   };
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal show={showEditExperience} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Aggiugni nuova esperienza</Modal.Title>
+        <Modal.Title>Modifica esperienza</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
@@ -36,6 +56,7 @@ function EditExperience({ show, id, handleClose }) {
               type="text"
               id="area"
               name="area"
+              value={formData.area}
               placeholder="Esempio: Napoli"
               onChange={(event) => handleOnChange(event)}
             />
@@ -46,6 +67,7 @@ function EditExperience({ show, id, handleClose }) {
               type="text"
               id="company"
               name="company"
+              value={formData.company}
               placeholder="Esempio: Micceria"
               onChange={(event) => handleOnChange(event)}
               required
@@ -57,6 +79,7 @@ function EditExperience({ show, id, handleClose }) {
               type="text"
               id="role"
               name="role"
+              value={formData.role}
               placeholder="Esempio: Attaccamicce"
               onChange={(event) => handleOnChange(event)}
               required
@@ -69,6 +92,7 @@ function EditExperience({ show, id, handleClose }) {
               id="description"
               name="description"
               rows="3"
+              value={formData.description}
               placeholder="Esempio: La mia prima esperienza in Micceria come attaccamicce"
               onChange={(event) => handleOnChange(event)}
               required
@@ -80,6 +104,7 @@ function EditExperience({ show, id, handleClose }) {
               type="text"
               id="image"
               name="image"
+              value={formData.image}
               placeholder="Esempio: https://media.gettyimages.com/id/147879469/it/foto/bomb-with-burning-fuse.jpg?s=612x612&w=gi&k=20&c=OumX2qNC4N-djQBBaDiQZHjtSTbaRJ1AOHRLFmHmrfM="
               onChange={(event) => handleOnChange(event)}
             />
@@ -90,6 +115,7 @@ function EditExperience({ show, id, handleClose }) {
               type="date"
               id="startDate"
               name="startDate"
+              value={formData.startDate}
               onChange={(event) => handleOnChange(event)}
               required
             />
@@ -100,6 +126,7 @@ function EditExperience({ show, id, handleClose }) {
               type="date"
               id="endDate"
               name="endDate"
+              value={formData.endDate}
               onChange={(event) => handleOnChange(event)}
             />
           </div>
@@ -113,7 +140,10 @@ function EditExperience({ show, id, handleClose }) {
         >
           Chiudi
         </Button>
-        <Button variant="primary" className="rounded-pill" onClick={handleSave}>
+        <Button variant="danger" className="rounded-pill" onClick={clearForm}>
+          Svuota campi
+        </Button>
+        <Button variant="primary" className="rounded-pill" onClick={handleEdit}>
           Salva
         </Button>
       </Modal.Footer>

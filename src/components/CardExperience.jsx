@@ -1,9 +1,11 @@
-import { Button, Card, Col, DropdownDivider, ListGroup, Row } from "react-bootstrap";
+import { Button, Card, Col, ListGroup, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { deleteExperience, putExperience } from "../data/fetch";
+import { deleteExperience } from "../data/fetch";
+import EditExperience from "./EditExperience";
+import { useState } from "react";
 
 function CardExperience({ exp }) {
-  console.log(exp);
+  const [showEditExperience, setShowEditExperience] = useState(false);
   return (
     <Card>
       <Row>
@@ -38,8 +40,26 @@ function CardExperience({ exp }) {
             <Link to="#">react.js, gitub</Link>
           </Card.Body>
           <Card.Footer>
-            <Button variant="primary" onClick={()=>deleteExperience(exp.user,exp._id)}>Elimina</Button>
-            <Button variant="primary" onClick={()=>putExperience(exp.user,exp._id)}>Modifica</Button>
+            <Button
+              variant="primary"
+              onClick={() => deleteExperience(exp.user, exp._id)}
+            >
+              Elimina
+            </Button>
+            <Button
+              variant="primary"
+              onClick={() => setShowEditExperience(true)}
+            >
+              {" "}
+              Modifica
+            </Button>
+            {showEditExperience && (
+              <EditExperience
+                showEditExperience={showEditExperience}
+                exp={exp}
+                handleClose={() => setShowEditExperience(false)}
+              />
+            )}
           </Card.Footer>
         </Col>
       </Row>

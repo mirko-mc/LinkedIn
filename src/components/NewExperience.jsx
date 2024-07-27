@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { creaEsperienza } from "../data/fetch";
 
-function NewExperience({ show, id, handleClose }) {
+function NewExperience({ showAddExperience, id, handleClose }) {
   const initialFormData = {
     area: "",
     company: "",
@@ -24,12 +24,12 @@ function NewExperience({ show, id, handleClose }) {
       .finally(handleClose());
   };
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal show={showAddExperience} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>Aggiugni nuova esperienza</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form>
+        <Form onSubmit={handleSave}>
           <div className="mb-3">
             <Form.Label htmlFor="area">Città</Form.Label>
             <Form.Control
@@ -113,7 +113,7 @@ function NewExperience({ show, id, handleClose }) {
         >
           Chiudi
         </Button>
-        <Button variant="primary" className="rounded-pill" onClick={handleSave}>
+        <Button variant="primary" className="rounded-pill" type="submit">
           Salva
         </Button>
       </Modal.Footer>

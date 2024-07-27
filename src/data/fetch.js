@@ -80,6 +80,19 @@ export const creaEsperienza = async (userId, formData) => {
 };
 
 // GET => RITORNA UNA SPECIFICA ESPERIENZA (EXTRA) LEGATA AL PUT https://striveschool-api.herokuapp.com/api/profile/:userId/experiences/:expId
+export const getExperience = async (userId, expId) => {
+  const response = await fetch(fetchUrl + `${userId}/experiences/${expId}`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `${apiToken}`,
+    },
+    method: "GET",
+  });
+  if (!response.ok)
+    throw new Error(`${response.status} - ${response.statusText}`);
+  const data = await response.json();
+  return data;
+}
 // PUT => MODIFICA UNA SPECIFICA ESPERIENZA (EXTRA) https://striveschool-api.herokuapp.com/api/profile/:userId/experiences/:expId
 export const putExperience = async (userId, expId, formData) => {
   const response = await fetch(fetchUrl + `${userId}/experiences/${expId}`, {
@@ -118,11 +131,45 @@ export const deleteExperience = async (userId, expId) => {
 }
 
 // PUT => AGGIORNA IL PROFILO UTENTE (EXTRA) https://striveschool-api.herokuapp.com/api/profile/
-/*
- * "role":"CTO",
- * "company":"Strive",
- * "startDate":"2019-06-16",
- * "endDate":"2019-06-16", null se ancora in corso
- * "description":"Doing stuff",
- * "area":"Berlin",
- */
+export const putProfile = async (userId, formData) => {
+  const response = await fetch(fetchUrl + userId, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `${apiToken}`,
+    },
+    method: "PUT",
+    body: JSON.stringify(formData),
+  });
+  if (response.ok) {
+    console.log(response);
+    alert("Profilo aggiornato");
+  } else {
+    console.log(response);
+    alert("Errore!! Profilo non aggiornato");
+  }
+}
+
+// ESEMPI DI CODICE PER UPLOAD DEI FILE:
+// https://gist.github.com/LidiaKovac/357cfaeeb6e0f71d7a3ddd8c3014e34d
+// POST => CARICA IMMAGINE PROFILO https://striveschool-api.herokuapp.com/api/profile/{userId}/picture
+// nome proprietà nel form-data: profile
+export const postProfilePicture = async (userId, formData) => {
+  const response = await fetch(fetchUrl + `${userId}/picture`, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `${apiToken}`,
+    },
+    method: "POST",
+    body: formData,
+  });
+  if (response.ok) {
+    console.log(response);
+    alert("Profilo aggiornato");
+  } else {
+    console.log(response);
+    alert("Errore!! Profilo non aggiornato");
+  }
+}
+
+// POST => CARICA IMMAGINE ESPERIENZA https://striveschool-api.herokuapp.com/api/profile/:userId/experiences/:expId/picture
+// nome proprietà nel form-data: experience
