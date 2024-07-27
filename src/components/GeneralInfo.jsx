@@ -12,9 +12,11 @@ import "./GeneralInfo.css";
 import { MyProfileContext } from "../context/MyProfileContext";
 import { cercaProfilo } from "../data/fetch";
 import EditProfile from "./EditProfile";
+import { AddProPic } from "./AddProPic";
 function GeneralInfo({ id }) {
   const { myProfile } = useContext(MyProfileContext);
   const [showEditProfile, setShowEditProfile] = useState(false);
+  const [showAddProPic, setShowAddProPic] = useState(false);
   const [user, setUser] = useState({});
   // verificare che id myPr e id prop siano uguali
   // se uguali usare context altrimenti fetch
@@ -23,8 +25,8 @@ function GeneralInfo({ id }) {
     myProfile?._id === id
       ? setUser(myProfile)
       : cercaProfilo(id)
-          .then((data) => setUser(data))
-          .catch((error) => console.log(error));
+        .then((data) => setUser(data))
+        .catch((error) => console.log(error));
   }, [id, myProfile]);
   return (
     <Card>
@@ -112,6 +114,17 @@ function GeneralInfo({ id }) {
             handleClose={() => setShowEditProfile(false)}
           />
         )}
+
+        <Button variant="secondary" onClick={() => setShowAddProPic(true)}>
+          Aggiungi foto profilo
+        </Button>
+        {showAddProPic && (
+          <AddProPic
+            showAddProPic={showAddProPic}
+            handleClose={() => setShowAddProPic(false)}
+          />
+        )}
+        
       </Card.Footer>
     </Card>
   );
