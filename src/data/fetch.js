@@ -131,8 +131,8 @@ export const deleteExperience = async (userId, expId) => {
 }
 
 // PUT => AGGIORNA IL PROFILO UTENTE (EXTRA) https://striveschool-api.herokuapp.com/api/profile/
-export const putProfile = async (userId, formData) => {
-  const response = await fetch(fetchUrl + userId, {
+export const putProfile = async (formData) => {
+  const response = await fetch(fetchUrl , {
     headers: {
       "Content-Type": "application/json",
       Authorization: `${apiToken}`,
@@ -145,7 +145,7 @@ export const putProfile = async (userId, formData) => {
     alert("Profilo aggiornato");
   } else {
     console.log(response);
-    alert("Errore!! Profilo non aggiornato");
+    alert(`${response.status} - ${response.statusText}`);
   }
 }
 

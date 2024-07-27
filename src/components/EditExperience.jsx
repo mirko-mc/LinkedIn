@@ -6,7 +6,6 @@ import { getExperience, putExperience } from "../data/fetch";
 
 function EditExperience({ exp, showEditExperience, handleClose }) {
   // getExperience(exp.user, exp._id).then((data) => console.log(data));
-  console.log(exp);
   const startDate = new Date(exp.startDate);
   const endDate = new Date(exp.endDate);
   const formattedStartDate = startDate.toISOString().split("T")[0];

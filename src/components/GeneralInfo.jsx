@@ -11,8 +11,10 @@ import { Link } from "react-router-dom";
 import "./GeneralInfo.css";
 import { MyProfileContext } from "../context/MyProfileContext";
 import { cercaProfilo } from "../data/fetch";
+import EditProfile from "./EditProfile";
 function GeneralInfo({ id }) {
   const { myProfile } = useContext(MyProfileContext);
+  const [showEditProfile, setShowEditProfile] = useState(false);
   const [user, setUser] = useState({});
   // verificare che id myPr e id prop siano uguali
   // se uguali usare context altrimenti fetch
@@ -101,6 +103,15 @@ function GeneralInfo({ id }) {
       <Card.Footer>
         <Button variant="primary">Messaggio</Button>
         <Button variant="tertiary">Altro</Button>
+        <Button variant="secondary" onClick={() => setShowEditProfile(true)}>
+          Modifica profilo
+        </Button>
+        {showEditProfile && (
+          <EditProfile
+            showEditProfile={showEditProfile}
+            handleClose={() => setShowEditProfile(false)}
+          />
+        )}
       </Card.Footer>
     </Card>
   );
