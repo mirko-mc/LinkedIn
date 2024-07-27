@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
 import { listaEsperienze } from "../data/fetch";
 import CardExperience from "./CardExperience";
+import { Button } from "react-bootstrap";
+import NewExperience from "./NewExperience";
 
 function Experience({ id }) {
   const [experienceList, setExperienceList] = useState([]);
+
+  const [show, setShow] = useState(false);
+
   useEffect(() => {
     // listaEsperienze("65ae3ed3600be100183a8698")
     listaEsperienze(id)
@@ -14,6 +19,14 @@ function Experience({ id }) {
     return (
       <>
         <h2>Esperienza</h2>
+        <Button onClick={() => setShow(true)}>Aggiungi esperienza</Button>
+        {show && (
+          <NewExperience
+            show={show}
+            id={id}
+            handleClose={() => setShow(false)}
+          />
+        )}
         <p>Non ci sono esperienze</p>
       </>
     );
@@ -21,8 +34,12 @@ function Experience({ id }) {
   return (
     <>
       <h2>Esperienza</h2>
+      <Button onClick={() => setShow(true)}>Aggiungi esperienza</Button>
+      {show && (
+        <NewExperience show={show} id={id} handleClose={() => setShow(false)} />
+      )}
       {experienceList.map((exp) => (
-        <CardExperience key={exp._id} exp={exp} />
+        <CardExperience key={exp._id} exp={exp} show={show} setShow={setShow} />
       ))}
     </>
   );

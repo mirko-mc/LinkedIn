@@ -1,7 +1,9 @@
-import { Card, Col, DropdownDivider, ListGroup, Row } from "react-bootstrap";
+import { Button, Card, Col, DropdownDivider, ListGroup, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { deleteExperience, putExperience } from "../data/fetch";
 
 function CardExperience({ exp }) {
+  console.log(exp);
   return (
     <Card>
       <Row>
@@ -35,7 +37,10 @@ function CardExperience({ exp }) {
             {exp.description && <Card.Text>{exp.description}</Card.Text>}
             <Link to="#">react.js, gitub</Link>
           </Card.Body>
-          <DropdownDivider />
+          <Card.Footer>
+            <Button variant="primary" onClick={()=>deleteExperience(exp.user,exp._id)}>Elimina</Button>
+            <Button variant="primary" onClick={()=>putExperience(exp.user,exp._id)}>Modifica</Button>
+          </Card.Footer>
         </Col>
       </Row>
     </Card>

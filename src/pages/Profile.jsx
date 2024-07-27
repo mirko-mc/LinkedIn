@@ -10,12 +10,10 @@ import { useContext, useEffect, useState } from "react";
 function Profile() {
   const { myProfile } = useContext(MyProfileContext);
   const { id } = useParams();
-  console.log(id);
   const [userId, setUserId] = useState(null);
   useEffect(() => {
     id ? setUserId(id) : setUserId(myProfile?._id);
   }, [myProfile, id]);
-  console.log(id);
   return (
     <Container>
       <Row>

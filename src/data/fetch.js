@@ -62,25 +62,61 @@ export const listaEsperienze = async (userId) => {
 };
 
 // POST => CREA UNA NUOVA ESPERIENZA https://striveschool-api.herokuapp.com/api/profile/:userId/experiences
-export const creaEsperienza = async (userId, formValue) => {
+export const creaEsperienza = async (userId, formData) => {
   const response = await fetch(fetchUrl + `${userId}/experiences`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `${apiToken}`,
     },
     method: "POST",
-    body: JSON.stringify(formValue),
+    body: JSON.stringify(formData),
   });
   if (response.ok) {
     alert("Esperienza aggiunta");
   } else {
+    console.log(response);
     alert("Errore!! Esperienza non aggiunta");
   }
 };
 
 // GET => RITORNA UNA SPECIFICA ESPERIENZA (EXTRA) LEGATA AL PUT https://striveschool-api.herokuapp.com/api/profile/:userId/experiences/:expId
 // PUT => MODIFICA UNA SPECIFICA ESPERIENZA (EXTRA) https://striveschool-api.herokuapp.com/api/profile/:userId/experiences/:expId
+export const putExperience = async (userId, expId, formData) => {
+  const response = await fetch(fetchUrl + `${userId}/experiences/${expId}`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `${apiToken}`,
+    },
+    method: "PUT",
+    body: JSON.stringify(formData),
+  });
+  if (response.ok) {
+    console.log(response);
+    alert("Esperienza aggiornata");
+  } else {
+    console.log(response);
+    alert("Errore!! Esperienza non aggiornata");
+  }
+}
+
 // DELETE => ELIMINA UNA SPECIFICA ESPERIENZA (EXTRA) https://striveschool-api.herokuapp.com/api/profile/:userId/experiences/:expId
+export const deleteExperience = async (userId, expId) => {
+  const response = await fetch(fetchUrl + `${userId}/experiences/${expId}`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `${apiToken}`,
+    },
+    method: "DELETE",
+  });
+  if (response.ok) {
+    console.log(response);
+    alert("Esperienza eliminata");
+  } else {
+    console.log(response);
+    alert("Errore!! Esperienza non eliminata");
+  }
+}
+
 // PUT => AGGIORNA IL PROFILO UTENTE (EXTRA) https://striveschool-api.herokuapp.com/api/profile/
 /*
  * "role":"CTO",

@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { creaEsperienza } from "../data/fetch";
 
-function NewExperience({ show, id, handleClose }) {
+function EditExperience({ show, id, handleClose }) {
   const initialFormData = {
     area: "",
     company: "",
@@ -121,4 +121,4 @@ function NewExperience({ show, id, handleClose }) {
   );
 }
 
-export default NewExperience;
+export default EditExperience;
