@@ -40,8 +40,7 @@ export const cercaProfilo = async (userId) => {
       Authorization: apiToken,
     },
   });
-  if (!response.ok)
-    throw new Error(response.status,response.statusText);
+  if (!response.ok) throw new Error(response.status, response.statusText);
   const dataRicerca = await response.json();
   return dataRicerca;
 };
@@ -92,7 +91,7 @@ export const getExperience = async (userId, expId) => {
     throw new Error(`${response.status} - ${response.statusText}`);
   const data = await response.json();
   return data;
-}
+};
 // PUT => MODIFICA UNA SPECIFICA ESPERIENZA (EXTRA) https://striveschool-api.herokuapp.com/api/profile/:userId/experiences/:expId
 export const putExperience = async (userId, expId, formData) => {
   const response = await fetch(fetchUrl + `${userId}/experiences/${expId}`, {
@@ -110,7 +109,7 @@ export const putExperience = async (userId, expId, formData) => {
     console.log(response);
     alert("Errore!! Esperienza non aggiornata");
   }
-}
+};
 
 // DELETE => ELIMINA UNA SPECIFICA ESPERIENZA (EXTRA) https://striveschool-api.herokuapp.com/api/profile/:userId/experiences/:expId
 export const deleteExperience = async (userId, expId) => {
@@ -128,11 +127,11 @@ export const deleteExperience = async (userId, expId) => {
     console.log(response);
     alert("Errore!! Esperienza non eliminata");
   }
-}
+};
 
 // PUT => AGGIORNA IL PROFILO UTENTE (EXTRA) https://striveschool-api.herokuapp.com/api/profile/
 export const putProfile = async (formData) => {
-  const response = await fetch(fetchUrl , {
+  const response = await fetch(fetchUrl, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `${apiToken}`,
@@ -147,29 +146,30 @@ export const putProfile = async (formData) => {
     console.log(response);
     alert(`${response.status} - ${response.statusText}`);
   }
-}
+};
 
 // ESEMPI DI CODICE PER UPLOAD DEI FILE:
 // https://gist.github.com/LidiaKovac/357cfaeeb6e0f71d7a3ddd8c3014e34d
 // POST => CARICA IMMAGINE PROFILO https://striveschool-api.herokuapp.com/api/profile/{userId}/picture
 // nome proprietà nel form-data: profile
-export const postProfilePicture = async (userId, formData) => {
+// POST => CARICA IMMAGINE ESPERIENZA https://striveschool-api.herokuapp.com/api/profile/:userId/experiences/:expId/picture
+// nome proprietà nel form-data: experience
+export const postPicture = async (userId, formData) => {
+  console.log(userId);
   const response = await fetch(fetchUrl + `${userId}/picture`, {
     headers: {
-      "Content-Type": "multipart/form-data",
+      // "Content-Type": "multipart/form-data", inserirendo questo content-type
       Authorization: `${apiToken}`,
     },
     method: "POST",
     body: formData,
   });
+  console.log(response);
   if (response.ok) {
     console.log(response);
-    alert("Profilo aggiornato");
+    alert("Foto aggiornata");
   } else {
     console.log(response);
-    alert("Errore!! Profilo non aggiornato");
+    alert("Errore!! Foto non aggiornata");
   }
-}
-
-// POST => CARICA IMMAGINE ESPERIENZA https://striveschool-api.herokuapp.com/api/profile/:userId/experiences/:expId/picture
-// nome proprietà nel form-data: experience
+};

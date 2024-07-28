@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { listaEsperienze } from "../data/fetch";
 import CardExperience from "./CardExperience";
-import { Button } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 import NewExperience from "./NewExperience";
+import { IcoEdit, IcoFollow } from "../assets/svg/IcoSvg";
+import { MyProfileContext } from "../context/MyProfileContext";
 
 function Experience({ id }) {
+  const { myProfile } = useContext(MyProfileContext);
   const [experienceList, setExperienceList] = useState([]);
 
   const [showAddExperience, setShowAddExperience] = useState(false);
@@ -34,22 +37,26 @@ function Experience({ id }) {
     );
 
   return (
-    <>
-      <h2>Esperienza</h2>
-      <Button onClick={() => setShowAddExperience(true)}>
-        Aggiungi esperienza
-      </Button>
-      {showAddExperience && (
-        <NewExperience
-          showAddExperience={showAddExperience}
-          id={id}
-          handleClose={() => setShowAddExperience(false)}
-        />
-      )}
+    <Row>
+      <Col lg={12} className="d-flex justify-content-between">
+        <h2>Esperienza</h2>
+        {myProfile?._id === id && (
+          <Button variant="tertiary" onClick={() => setShowAddExperience(true)}>
+            <IcoFollow />
+          </Button>
+        )}
+        {showAddExperience && (
+          <NewExperience
+            showAddExperience={showAddExperience}
+            id={id}
+            handleClose={() => setShowAddExperience(false)}
+          />
+        )}
+      </Col>
       {experienceList.map((exp) => (
         <CardExperience key={exp._id} exp={exp} />
       ))}
-    </>
+    </Row>
   );
 }
 export default Experience;

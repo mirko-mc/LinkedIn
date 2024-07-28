@@ -46,7 +46,7 @@ function EditProfile({ showEditProfile, handleClose }) {
   return (
     <Modal show={showEditProfile} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Modifica esperienza</Modal.Title>
+        <Modal.Title>Modifica profilo</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
