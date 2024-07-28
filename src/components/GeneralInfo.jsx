@@ -11,8 +11,13 @@ import { Link } from "react-router-dom";
 import "./GeneralInfo.css";
 import { MyProfileContext } from "../context/MyProfileContext";
 import { cercaProfilo } from "../data/fetch";
+import EditProfile from "./EditProfile";
+import { AddProPic } from "./AddProPic";
+import { IcoEdit } from "../assets/svg/IcoSvg";
 function GeneralInfo({ id }) {
   const { myProfile } = useContext(MyProfileContext);
+  const [showEditProfile, setShowEditProfile] = useState(false);
+  const [showAddProPic, setShowAddProPic] = useState(false);
   const [user, setUser] = useState({});
   // verificare che id myPr e id prop siano uguali
   // se uguali usare context altrimenti fetch
@@ -27,16 +32,49 @@ function GeneralInfo({ id }) {
   return (
     <Card>
       <Card.Header className="position-relative">
-        <Card.Img
-          variant="top"
-          id="proPic"
-          src={user.image}
-          height={"150px"}
-          className="rounded-circle w-auto position-absolute start-5 border border-3"
-        />
+        {myProfile?._id === id ? (
+          <Card.Img
+            variant="top"
+            id="proPic"
+            src={user.image}
+            height={"150px"}
+            className="rounded-circle w-auto position-absolute start-5 border border-3"
+            onClick={() => setShowAddProPic(true)}
+          />
+        ) : (
+          <Card.Img
+            variant="top"
+            id="proPic"
+            src={user.image}
+            height={"150px"}
+            className="rounded-circle w-auto position-absolute start-5 border border-3"
+          />
+        )}
+        {showAddProPic && (
+          <AddProPic
+            id={id}
+            showAddProPic={showAddProPic}
+            handleClose={() => setShowAddProPic(false)}
+          />
+        )}
         <Card.Img variant="top" src={user.image} height={"150px"} />
       </Card.Header>
       <Card.Body>
+        <Row>
+          <Col className="d-flex justify-content-end">
+            {myProfile?._id === id && (
+              <Button variant="light" onClick={() => setShowEditProfile(true)}>
+                <IcoEdit />
+              </Button>
+            )}
+            {showEditProfile && (
+              <EditProfile
+                showEditProfile={showEditProfile}
+                handleClose={() => setShowEditProfile(false)}
+              />
+            )}
+          </Col>
+        </Row>
         <Row>
           <Col lg={8}>
             <ul className="list-group list-group-horizontal ">
