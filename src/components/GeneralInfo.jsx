@@ -14,40 +14,66 @@ import { cercaProfilo } from "../data/fetch";
 import EditProfile from "./EditProfile";
 import { AddProPic } from "./AddProPic";
 import { IcoEdit } from "../assets/svg/IcoSvg";
+import { AlertCustom } from "./AlertCustom";
+import { Loading } from "./Loading";
+
 function GeneralInfo({ id }) {
   const { myProfile } = useContext(MyProfileContext);
   const [showEditProfile, setShowEditProfile] = useState(false);
   const [showAddProPic, setShowAddProPic] = useState(false);
   const [user, setUser] = useState({});
-  // verificare che id myPr e id prop siano uguali
-  // se uguali usare context altrimenti fetch
-  // usare stato terzo contenente dati context o fetch
+  const [isLoading, setIsLoading] = useState(false);
+  const [inAlert, setInAlert] = useState(false);
+  const initialAlertState = {
+    isAlert: false,
+    heading: "",
+    message: "",
+    variant: "",
+  };
   useEffect(() => {
-    myProfile?._id === id
-      ? setUser(myProfile)
-      : cercaProfilo(id)
-          .then((data) => setUser(data))
-          .catch((error) => console.log(error));
+    setIsLoading(true);
+    if (myProfile?._id && id)
+      myProfile?._id === id
+        ? setUser(myProfile)
+        : cercaProfilo(id)
+            .then((data) => setUser(data))
+            .catch((e) => {
+              setInAlert({
+                isAlert: true,
+                heading: `Error ${e.message}`,
+                message: "Loading Error. Try Later",
+                variant: "danger",
+              });
+              setTimeout(() => setInAlert(initialAlertState), 5000);
+            });
+    setIsLoading(false);
   }, [id, myProfile]);
   return (
     <Card>
       <Card.Header className="position-relative">
+        {inAlert.isAlert && (
+          <AlertCustom
+          variant={inAlert.variant}
+          heading={inAlert.heading}
+          message={inAlert.message}
+          />
+        )}
         {myProfile?._id === id ? (
           <Card.Img
-            variant="top"
-            id="proPic"
-            src={user.image}
-            height={"150px"}
-            className="rounded-circle w-auto position-absolute start-5 border border-3"
-            onClick={() => setShowAddProPic(true)}
+          variant="top"
+          id="proPic"
+          src={user.image}
+          height={"150px"}
+          className="rounded-circle w-auto position-absolute start-5 border border-3"
+          onClick={() => setShowAddProPic(true)}
           />
         ) : (
           <Card.Img
-            variant="top"
-            id="proPic"
-            src={user.image}
-            height={"150px"}
-            className="rounded-circle w-auto position-absolute start-5 border border-3"
+          variant="top"
+          id="proPic"
+          src={user.image}
+          height={"150px"}
+          className="rounded-circle w-auto position-absolute start-5 border border-3"
           />
         )}
         {showAddProPic && (
@@ -62,6 +88,7 @@ function GeneralInfo({ id }) {
       <Card.Body>
         <Row>
           <Col className="d-flex justify-content-end">
+        {isLoading && <Loading />}
             {myProfile?._id === id && (
               <Button variant="light" onClick={() => setShowEditProfile(true)}>
                 <IcoEdit />
