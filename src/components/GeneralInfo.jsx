@@ -30,22 +30,23 @@ function GeneralInfo({ id }) {
     message: "",
     variant: "",
   };
+  console.log(cercaProfilo)
   useEffect(() => {
     setIsLoading(true);
     if (myProfile?._id && id)
       myProfile?._id === id
         ? setUser(myProfile)
         : cercaProfilo(id)
-            .then((data) => setUser(data))
-            .catch((e) => {
-              setInAlert({
-                isAlert: true,
-                heading: `Error ${e.message}`,
-                message: "Loading Error. Try Later",
-                variant: "danger",
-              });
-              setTimeout(() => setInAlert(initialAlertState), 5000);
+          .then((data) => setUser(data))
+          .catch((e) => {
+            setInAlert({
+              isAlert: true,
+              heading: `Error ${e.message}`,
+              message: "Loading Error. Try Later",
+              variant: "danger",
             });
+            setTimeout(() => setInAlert(initialAlertState), 5000);
+          });
     setIsLoading(false);
   }, [id, myProfile]);
   return (
@@ -53,27 +54,27 @@ function GeneralInfo({ id }) {
       <Card.Header className="position-relative">
         {inAlert.isAlert && (
           <AlertCustom
-          variant={inAlert.variant}
-          heading={inAlert.heading}
-          message={inAlert.message}
+            variant={inAlert.variant}
+            heading={inAlert.heading}
+            message={inAlert.message}
           />
         )}
         {myProfile?._id === id ? (
           <Card.Img
-          variant="top"
-          id="proPic"
-          src={user.image}
-          height={"150px"}
-          className="rounded-circle w-auto position-absolute start-5 border border-3"
-          onClick={() => setShowAddProPic(true)}
+            variant="top"
+            id="proPic"
+            src={user.image}
+            height={"150px"}
+            className="rounded-circle w-auto position-absolute start-5 border border-3"
+            onClick={() => setShowAddProPic(true)}
           />
         ) : (
           <Card.Img
-          variant="top"
-          id="proPic"
-          src={user.image}
-          height={"150px"}
-          className="rounded-circle w-auto position-absolute start-5 border border-3"
+            variant="top"
+            id="proPic"
+            src={user.image}
+            height={"150px"}
+            className="rounded-circle w-auto position-absolute start-5 border border-3"
           />
         )}
         {showAddProPic && (
@@ -88,7 +89,7 @@ function GeneralInfo({ id }) {
       <Card.Body>
         <Row>
           <Col className="d-flex justify-content-end">
-        {isLoading && <Loading />}
+            {isLoading && <Loading />}
             {myProfile?._id === id && (
               <Button variant="light" onClick={() => setShowEditProfile(true)}>
                 <IcoEdit />
@@ -127,20 +128,24 @@ function GeneralInfo({ id }) {
               Più di {Math.round(Math.random() * 999)} collegamenti
             </Card.Text>
             <Row>
+              <div className="d-flex">
               <Card.Img
-                src="https://png.pngtree.com/png-clipart/20211008/ourmid/pngtree-question-mark-icon-png-image_3975287.png"
+                src={user.image}
                 height={"50px"}
-                className="rounded-circle w-auto"
+                className="rounded-circle w-auto me-2"
               />
+              
               <Card.Img
-                src="https://png.pngtree.com/png-clipart/20211008/ourmid/pngtree-question-mark-icon-png-image_3975287.png"
+                src={user.image}
                 height={"50px"}
-                className="rounded-circle w-auto"
+                className="rounded-circle w-auto me-2"
               />
+              
               <Card.Text>
                 {user.name} {user.surname}, {user.name} {user.surname} e altri 2
                 collegamenti in comune
               </Card.Text>
+              </div>
             </Row>
           </Col>
 
@@ -148,17 +153,20 @@ function GeneralInfo({ id }) {
             <span>
               <Card.Img
                 variant="top"
-                src="https://png.pngtree.com/png-clipart/20211008/ourmid/pngtree-question-mark-icon-png-image_3975287.png"
+                src="https://tse1.mm.bing.net/th?id=OIP.b-2BzLUbk3NKlwyRP5LE3AHaEK&pid=Api&P=0&h=180"
                 height={"50px"}
                 className="w-auto"
               />
-              <Card.Text>{user.title}</Card.Text>
+            </span>
+            <span className="d-flex mt-2">
+              
               <Card.Img
                 variant="top"
-                src="https://png.pngtree.com/png-clipart/20211008/ourmid/pngtree-question-mark-icon-png-image_3975287.png"
+                src="https://tse4.mm.bing.net/th?id=OIP.Kdl_C3cGU7UCaT6GqHUZFAHaEH&pid=Api&P=0&h=180"
                 height={"50px"}
                 className="w-auto"
               />
+              <Card.Text className="mt-2 ms-1">{user.title}</Card.Text>
             </span>
           </Col>
         </Row>

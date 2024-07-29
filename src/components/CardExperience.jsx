@@ -41,7 +41,7 @@ function CardExperience({ exp }) {
         <Col lg={10}>
           <Card.Body>
             <div className="d-flex justify-content-between">
-              <ListGroup horizontal>
+              <ListGroup horizontal className="flex-column">
                 <Card.Title>{exp.company}</Card.Title>
                 <li className="list-group-item p-0 border-0">{exp.role}</li>
                 <li className="list-group-item p-0 border-0 central-dot">
