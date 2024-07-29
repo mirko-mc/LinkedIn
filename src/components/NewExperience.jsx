@@ -4,9 +4,13 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { creaEsperienza } from "../data/fetch";
 import { UpdateExperienceContext } from "../context/UpdateExperienceContext";
+import { AlertCustom, initialAlertState } from "./AlertCustom";
+import { Loading } from "./Loading";
 
 function NewExperience({ showAddExperience, id, handleClose }) {
   const { setToReRenderExperience } = useContext(UpdateExperienceContext);
+  const [inAlert, setInAlert] = useState(initialAlertState);
+  const [isLoading, setIsLoading] = useState(false);
   const initialFormData = {
     area: "",
     company: "",
@@ -21,10 +25,33 @@ function NewExperience({ showAddExperience, id, handleClose }) {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
   const handleSave = () => {
+    setIsLoading(true);
     creaEsperienza(id, formData)
-      .then(() => setToReRenderExperience(true))
-      .catch((error) => console.log(error))
-      .finally(handleClose());
+      .then(() => {
+        setInAlert({
+          isAlert: true,
+          heading: `Esperienza aggiunta`,
+          message: `Esperienza aggiunta correttamente`,
+          variant: "success",
+        });
+        setToReRenderExperience(true);
+        setTimeout(() => {
+          setInAlert(initialAlertState);
+          if (showAddExperience) return handleClose();
+        }, 3000);
+      })
+      .catch((err) => {
+        setInAlert({
+          isAlert: true,
+          heading: `Error ${err.message}`,
+          message: "Loading Error. Try Later",
+          variant: "danger",
+        });
+        setTimeout(() => setInAlert(initialAlertState), 5000);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
   return (
     <Modal show={showAddExperience} onHide={handleClose}>
@@ -32,7 +59,7 @@ function NewExperience({ showAddExperience, id, handleClose }) {
         <Modal.Title>Aggiugni nuova esperienza</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form onSubmit={handleSave}>
+        <Form>
           <div className="mb-3">
             <Form.Label htmlFor="area">Città</Form.Label>
             <Form.Control
@@ -109,6 +136,8 @@ function NewExperience({ showAddExperience, id, handleClose }) {
         </Form>
       </Modal.Body>
       <Modal.Footer>
+        {isLoading && <Loading />}
+        {inAlert.isAlert && <AlertCustom inAlert={inAlert} />}
         <Button
           variant="secondary"
           className="rounded-pill"
@@ -116,7 +145,7 @@ function NewExperience({ showAddExperience, id, handleClose }) {
         >
           Chiudi
         </Button>
-        <Button variant="primary" className="rounded-pill" type="submit">
+        <Button variant="primary" className="rounded-pill" onClick={handleSave}>
           Salva
         </Button>
       </Modal.Footer>

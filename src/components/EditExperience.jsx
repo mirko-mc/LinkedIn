@@ -162,7 +162,7 @@ function EditExperience({ exp, showEditExperience, handleClose }) {
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        {isLoading ? <Loading /> : null}
+        {isLoading && <Loading />}
         {inAlert.isAlert && <AlertCustom inAlert={inAlert} />}
         <Button
           variant="secondary"
