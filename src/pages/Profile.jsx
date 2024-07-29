@@ -6,6 +6,7 @@ import "./Profile.css";
 import { useParams } from "react-router-dom";
 import { MyProfileContext } from "../context/MyProfileContext";
 import { useContext, useEffect, useState } from "react";
+import { UpdateExperienceContextProvider } from "../context/UpdateExperienceContext";
 
 function Profile() {
   const { myProfile } = useContext(MyProfileContext);
@@ -18,8 +19,10 @@ function Profile() {
     <Container>
       <Row>
         <Col lg={9}>
-          <GeneralInfo id={userId} />
-          <Experience id={userId} />
+          <UpdateExperienceContextProvider>
+            <GeneralInfo id={userId} />
+            <Experience id={userId} />
+          </UpdateExperienceContextProvider>
         </Col>
         <Col lg={3}>
           <Aside />

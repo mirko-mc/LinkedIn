@@ -1,11 +1,17 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { getExperience, putExperience } from "../data/fetch";
+import { UpdateExperienceContext } from "../context/UpdateExperienceContext";
+import { AlertCustom, initialAlertState } from "./AlertCustom";
+import { Loading } from "./Loading";
 
 function EditExperience({ exp, showEditExperience, handleClose }) {
   // getExperience(exp.user, exp._id).then((data) => console.log(data));
+  const { setToReRenderExperience } = useContext(UpdateExperienceContext);
+  const [inAlert, setInAlert] = useState(initialAlertState);
+  const [isLoading, setIsLoading] = useState(false);
   const startDate = new Date(exp.startDate);
   const endDate = new Date(exp.endDate);
   const formattedStartDate = startDate.toISOString().split("T")[0];
@@ -38,9 +44,33 @@ function EditExperience({ exp, showEditExperience, handleClose }) {
     setFormData({ ...formData, [target.name]: target.value });
   };
   const handleEdit = () => {
+    setIsLoading(true);
     putExperience(exp.user, exp._id, formData)
-      .catch((error) => console.log(error))
-      .finally(handleClose());
+      .then(() => {
+        setInAlert({
+          isAlert: true,
+          heading: `Esperienza modificata`,
+          message: `Esperienza modificata correttamente`,
+          variant: "success",
+        });
+        setToReRenderExperience(true);
+        setTimeout(() => {
+          setInAlert(initialAlertState);
+          if (showEditExperience) return handleClose();
+        }, 3000);
+      })
+      .catch((err) => {
+        setInAlert({
+          isAlert: true,
+          heading: `Error ${err.message}`,
+          message: "Loading Error. Try Later",
+          variant: "danger",
+        });
+        setTimeout(() => setInAlert(initialAlertState), 5000);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
   return (
     <Modal show={showEditExperience} onHide={handleClose}>
@@ -132,6 +162,8 @@ function EditExperience({ exp, showEditExperience, handleClose }) {
         </Form>
       </Modal.Body>
       <Modal.Footer>
+        {isLoading ? <Loading /> : null}
+        {inAlert.isAlert && <AlertCustom inAlert={inAlert} />}
         <Button
           variant="secondary"
           className="rounded-pill"

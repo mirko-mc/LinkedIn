@@ -6,61 +6,67 @@ import NewExperience from "./NewExperience";
 import { IcoFollow } from "../assets/svg/IcoSvg";
 import { MyProfileContext } from "../context/MyProfileContext";
 import { Loading } from "./Loading";
-import { AlertCustom } from "./AlertCustom";
+import { AlertCustom, initialAlertState } from "./AlertCustom";
+import { UpdateExperienceContext } from "../context/UpdateExperienceContext";
 
 function Experience({ id }) {
   const { myProfile } = useContext(MyProfileContext);
+  const { toReRenderExperience, setToReRenderExperience } = useContext(
+    UpdateExperienceContext
+  );
   const [experienceList, setExperienceList] = useState([]);
   const [showAddExperience, setShowAddExperience] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [inAlert, setInAlert] = useState(false);
-  const initialAlertState = {
-    isAlert: false,
-    heading: "",
-    message: "",
-    variant: "",
-  };
+  const [inAlert, setInAlert] = useState(initialAlertState);
 
   useEffect(() => {
-    setIsLoading(true);
-    id &&
-      listaEsperienze(id)
-        .then((data) => setExperienceList(data))
-        .catch((e) => {
-          setInAlert({
-            isAlert: true,
-            heading: `Error ${e.message}`,
-            message: "Loading Error. Try Later",
-            variant: "danger",
+    if (toReRenderExperience) {
+      setIsLoading(true);
+      id &&
+        listaEsperienze(id)
+          .then((data) => {
+            setExperienceList(data);
+            return setToReRenderExperience(false);
+          })
+          .catch((e) => {
+            setInAlert({
+              isAlert: true,
+              heading: `Error ${e.message}`,
+              message: "Loading Error. Try Later",
+              variant: "danger",
+            });
+            setTimeout(() => setInAlert(initialAlertState), 5000);
           });
-          setTimeout(() => setInAlert(initialAlertState), 5000);
-        });
-    setIsLoading(false);
-  }, [id]);
+      setIsLoading(false);
+    }
+  }, [id, toReRenderExperience]);
   if (experienceList.length === 0)
     return (
-      <>
-        {isLoading && <Loading />}
-        {inAlert.isAlert && (
-          <AlertCustom
-            variant={inAlert.variant}
-            heading={inAlert.heading}
-            message={inAlert.message}
-          />
-        )}
-        <h2>Esperienza</h2>
-        <Button onClick={() => setShowAddExperience(true)}>
-          Aggiungi esperienza
-        </Button>
-        {showAddExperience && (
-          <NewExperience
-            show={showAddExperience}
-            id={id}
-            handleClose={() => setShowAddExperience(false)}
-          />
-        )}
-        <p>Non ci sono esperienze</p>
-      </>
+      <Row>
+        <Col lg={12} className="d-flex justify-content-between">
+          {isLoading && <Loading />}
+          {inAlert.isAlert && <AlertCustom inAlert={inAlert} />}
+          <h2>Esperienza</h2>
+          {myProfile?._id === id && (
+            <Button
+              variant="tertiary"
+              onClick={() => setShowAddExperience(true)}
+            >
+              <IcoFollow />
+            </Button>
+          )}
+          {showAddExperience && (
+            <NewExperience
+              show={showAddExperience}
+              id={id}
+              handleClose={() => setShowAddExperience(false)}
+            />
+          )}
+        </Col>
+        <Col lg={12}>
+          <p>Non ci sono esperienze</p>
+        </Col>
+      </Row>
     );
 
   return (
@@ -81,13 +87,7 @@ function Experience({ id }) {
         )}
       </Col>
       {isLoading && <Loading />}
-      {inAlert.isAlert && (
-        <AlertCustom
-          variant={inAlert.variant}
-          heading={inAlert.heading}
-          message={inAlert.message}
-        />
-      )}
+      {inAlert.isAlert && <AlertCustom inAlert={inAlert} />}
       {experienceList.map((exp) => (
         <CardExperience key={exp._id} exp={exp} />
       ))}

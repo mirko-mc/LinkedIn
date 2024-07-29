@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { creaEsperienza } from "../data/fetch";
+import { UpdateExperienceContext } from "../context/UpdateExperienceContext";
 
 function NewExperience({ showAddExperience, id, handleClose }) {
+  const { setToReRenderExperience } = useContext(UpdateExperienceContext);
   const initialFormData = {
     area: "",
     company: "",
@@ -20,6 +22,7 @@ function NewExperience({ showAddExperience, id, handleClose }) {
   };
   const handleSave = () => {
     creaEsperienza(id, formData)
+      .then(() => setToReRenderExperience(true))
       .catch((error) => console.log(error))
       .finally(handleClose());
   };
