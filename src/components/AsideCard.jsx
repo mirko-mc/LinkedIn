@@ -14,7 +14,7 @@ function AsideCard({ profilo, type }) {
             as={Link}
             to={`/profile/${profilo._id}`}
           >{`${profilo.name} ${profilo.surname}`}</Card.Title>
-          <div className="item">
+          <div className="item text-truncate">
             <p className="m-0">{profilo.title}</p>
             <p className="mb-1">{profilo.bio}</p>
           </div>
