@@ -70,12 +70,14 @@ export const creaEsperienza = async (userId, formData) => {
     method: "POST",
     body: JSON.stringify(formData),
   });
-  if (response.ok) {
-    alert("Esperienza aggiunta");
-  } else {
-    console.log(response);
-    alert("Errore!! Esperienza non aggiunta");
-  }
+  if (!response.ok)
+    throw new Error(`${response.status} - ${response.statusText}`);
+  // if (response.ok) {
+  //   alert("Esperienza aggiunta");
+  // } else {
+  //   console.log(response);
+  //   alert("Errore!! Esperienza non aggiunta");
+  // }
 };
 
 // GET => RITORNA UNA SPECIFICA ESPERIENZA (EXTRA) LEGATA AL PUT https://striveschool-api.herokuapp.com/api/profile/:userId/experiences/:expId
@@ -102,13 +104,15 @@ export const putExperience = async (userId, expId, formData) => {
     method: "PUT",
     body: JSON.stringify(formData),
   });
-  if (response.ok) {
-    console.log(response);
-    alert("Esperienza aggiornata");
-  } else {
-    console.log(response);
-    alert("Errore!! Esperienza non aggiornata");
-  }
+  if (!response.ok)
+    throw new Error(`${response.status} - ${response.statusText}`);
+  // if (response.ok) {
+  //   console.log(response);
+  //   alert("Esperienza aggiornata");
+  // } else {
+  //   console.log(response);
+  //   alert("Errore!! Esperienza non aggiornata");
+  // }
 };
 
 // DELETE => ELIMINA UNA SPECIFICA ESPERIENZA (EXTRA) https://striveschool-api.herokuapp.com/api/profile/:userId/experiences/:expId
@@ -120,13 +124,15 @@ export const deleteExperience = async (userId, expId) => {
     },
     method: "DELETE",
   });
-  if (response.ok) {
-    console.log(response);
-    alert("Esperienza eliminata");
-  } else {
-    console.log(response);
-    alert("Errore!! Esperienza non eliminata");
-  }
+  if (!response.ok)
+    throw new Error(`${response.status} - ${response.statusText}`);
+  // if (response.ok) {
+  //   console.log(response);
+  //   alert("Esperienza eliminata");
+  // } else {
+  //   console.log(response);
+  //   alert("Errore!! Esperienza non eliminata");
+  // }
 };
 
 // PUT => AGGIORNA IL PROFILO UTENTE (EXTRA) https://striveschool-api.herokuapp.com/api/profile/
@@ -139,13 +145,15 @@ export const putProfile = async (formData) => {
     method: "PUT",
     body: JSON.stringify(formData),
   });
-  if (response.ok) {
-    console.log(response);
-    alert("Profilo aggiornato");
-  } else {
-    console.log(response);
-    alert(`${response.status} - ${response.statusText}`);
-  }
+  if (!response.ok)
+    throw new Error(`${response.status} - ${response.statusText}`);
+  // if (response.ok) {
+  //   console.log(response);
+  //   alert("Profilo aggiornato");
+  // } else {
+  //   console.log(response);
+  //   alert(`${response.status} - ${response.statusText}`);
+  // }
 };
 
 // ESEMPI DI CODICE PER UPLOAD DEI FILE:
@@ -155,7 +163,6 @@ export const putProfile = async (formData) => {
 // POST => CARICA IMMAGINE ESPERIENZA https://striveschool-api.herokuapp.com/api/profile/:userId/experiences/:expId/picture
 // nome proprietà nel form-data: experience
 export const postPicture = async (userId, formData) => {
-  console.log(userId);
   const response = await fetch(fetchUrl + `${userId}/picture`, {
     headers: {
       // "Content-Type": "multipart/form-data", inserirendo questo content-type
@@ -164,12 +171,14 @@ export const postPicture = async (userId, formData) => {
     method: "POST",
     body: formData,
   });
-  console.log(response);
-  if (response.ok) {
-    console.log(response);
-    alert("Foto aggiornata");
-  } else {
-    console.log(response);
-    alert("Errore!! Foto non aggiornata");
-  }
+  if (!response.ok)
+    throw new Error(`${response.status} - ${response.statusText}`);
+  // console.log(response);
+  // if (response.ok) {
+  //   console.log(response);
+  //   alert("Foto aggiornata");
+  // } else {
+  //   console.log(response);
+  //   alert("Errore!! Foto non aggiornata");
+  // }
 };

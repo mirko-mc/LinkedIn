@@ -4,10 +4,13 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { putProfile } from "../data/fetch";
 import { MyProfileContext } from "../context/MyProfileContext";
+import { Loading } from "./Loading";
+import { AlertCustom, initialAlertState } from "./AlertCustom";
 
 function EditProfile({ showEditProfile, handleClose }) {
-  const { myProfile } = useContext(MyProfileContext);
-
+  const { myProfile, setToReRenderMyProfile } = useContext(MyProfileContext);
+  const [inAlert, setInAlert] = useState(initialAlertState);
+  const [isLoading, setIsLoading] = useState(false);
   const initialFormData = {
     area: myProfile.area,
     bio: myProfile.bio,
@@ -39,9 +42,33 @@ function EditProfile({ showEditProfile, handleClose }) {
     setFormData({ ...formData, [target.name]: target.value });
   };
   const handleSave = () => {
+    setIsLoading(true);
     putProfile(formData)
-      .catch((error) => console.log(error))
-      .finally(handleClose());
+      .then(() => {
+        setInAlert({
+          isAlert: true,
+          heading: `Profilo modificata`,
+          message: `Profilo modificata correttamente`,
+          variant: "success",
+        });
+        setToReRenderMyProfile(true);
+        setTimeout(() => {
+          setInAlert(initialAlertState);
+          if (showEditProfile) return handleClose();
+        }, 3000);
+      })
+      .catch((err) => {
+        setInAlert({
+          isAlert: true,
+          heading: `Error ${err.message}`,
+          message: "Loading Error. Try Later",
+          variant: "danger",
+        });
+        setTimeout(() => setInAlert(initialAlertState), 5000);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
   return (
     <Modal show={showEditProfile} onHide={handleClose}>
@@ -123,6 +150,8 @@ function EditProfile({ showEditProfile, handleClose }) {
         </Form>
       </Modal.Body>
       <Modal.Footer>
+        {isLoading && <Loading />}
+        {inAlert.isAlert && <AlertCustom inAlert={inAlert} />}
         <Button
           variant="secondary"
           className="rounded-pill"
