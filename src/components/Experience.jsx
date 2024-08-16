@@ -20,7 +20,6 @@ function Experience({ id }) {
   const [inAlert, setInAlert] = useState(initialAlertState);
 
   useEffect(() => {
-    if (toReRenderExperience) {
       setIsLoading(true);
       id &&
         listaEsperienze(id)
@@ -38,7 +37,6 @@ function Experience({ id }) {
             setTimeout(() => setInAlert(initialAlertState), 5000);
           });
       setIsLoading(false);
-    }
   }, [id, toReRenderExperience]);
   if (experienceList.length === 0)
     return (
